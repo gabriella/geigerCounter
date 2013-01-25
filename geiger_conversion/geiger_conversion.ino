@@ -22,7 +22,7 @@ long CountTime = 1000000; // 1 second, in microseconds
 long interval = 10000;//1 minute long change this from 1 second
 long prevTime = 0;
 unsigned long currentTime;
-Metro CPMMetro = Metro(10000);
+Metro CPMMetro = Metro(60000);
 
 int countState = 0;
 int prevCountState = 0;
@@ -37,30 +37,29 @@ void incrementCount(void) {
 
 void printCount(void) {
   noInterrupts();
-  Serial.print("millis:");
-  Serial.print(millis());
-  Serial.print(";");
-  Serial.print("counts");
-  Serial.print(counts);
-  
-  
-//  Serial.print("counter = ");
-//  Serial.println(counter);
-//  Serial.print("countState = ");
-//  Serial.println(countState);
-//  Serial.print("prevCountState = ");
-//  Serial.println(prevCountState);
-
-
-if(counts != prevCountState){
-  Serial.println("different");
+ //Serial.println();
+//  Serial.print("millis:");
+//  Serial.print(millis());
+//  Serial.print(";");
+//  Serial.print("counts:");
+//  Serial.print(counts);
+ 
+//if(counts != prevCountState){
+// Serial.println();
+// Serial.println("different");
  if(counts != 0){
    counter++;
-  Serial.print("counter number = ");
-  Serial.println(counter);
+   //Serial.println();
+  Serial.print("millis:");
+  Serial.print(millis());
+  Serial.print("; counts:");
+  Serial.print(counts);
+  Serial.print("; counter number = ");
+  Serial.print(counter);
+ Serial.println();
  } 
-}
 
+//Serial.println();
 prevCountState = counts;
 
   
@@ -95,30 +94,21 @@ void loop() {
 
   digitalWrite(LEDPin, LOW);
   if(CPMMetro.check()==1){
-    Serial.print("Startover");
+    Serial.println();
+    Serial.print("total counts = ");
+    Serial.println(counter);
+    //Serial.println("Startover");
     counter = 0;
     
-    Serial.print("millis");
-    Serial.println(millis());
-    Serial.print("minutes");
+   // Serial.print("millis");
+    //Serial.println(millis());
+    Serial.print("minute: ");
     
-    unsigned long minutes = millis()/1000;
+    unsigned long minutes = millis()/60000;
     Serial.println(minutes);
   }
 
   delay(30);
 }
-//
-//void resetTime(){
-//   currentTime= millis();
-// if(currentTime-prevTime>interval){
-//   prevTime = currentTime;
-//     Serial.print(prevTime);
-//
-// } 
-//
-//  
-//}
-
 
 
